@@ -9,7 +9,7 @@ export const StyledHomepage = styled.div`
 
 export const StyledAboutPage = styled.div`
   width: 100%;
-  margin: 3rem 10rem 3rem 10rem;
+  margin: 3rem 5rem 3rem 5rem;
 
   & h1{
     margin-bottom: 2rem;
