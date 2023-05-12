@@ -5,20 +5,56 @@ import { useNavigate} from "react-router-dom";
 import { AppContext } from '../../../../app/App';
 
 const DailyActions = () => {
-  const trainingStatus = useContext(AppContext)
-  var navigate = useNavigate();
+  const {training, setTraining} = useContext(AppContext)
+  var navigate = useNavigate()
   var [questionToShow, setQuestionShow] = useState(0)
 
-  const nextQuestion = () => {
-    if(questionToShow < dailyActionsTree.length - 1){
-      questionToShow = questionToShow+1
-      setQuestionShow(questionToShow)
+  const computeScore = buttonClicked => {
+    if(buttonClicked==='Yes'){
+      training.score = training.score + 1
+    } else if(buttonClicked==='No'){
+      training.score = training.score - 0.5
+      /* if(noCounts === 1){
+        training.score = training.score - 1
+        noCounts = 0
+      } else {
+        training.score = training.score - 0.25
+        noCounts++
+      } */
     } else {
-      trainingStatus.training.dailyAction = 'complete'
-      trainingStatus.setTraining(trainingStatus.training)
-      navigate('/training/completed')
+      training.score = training.score + 0.25
     }
-    console.log('question to show: ', questionToShow+1)
+  }
+
+  const navigateToNextScreen = () => {
+    training.dailyAction = 'complete'
+    setTraining(training)
+    navigate('/training/completed')
+  }
+
+  const nextQuestion = event => {
+    event.preventDefault();
+    var nextQuestion;
+    var buttonClickedValue = event.target.value
+
+    var currentQuestion = questionToShow
+
+    computeScore(buttonClickedValue)
+    
+    if(currentQuestion===0){
+      if(buttonClickedValue === 'Yes' || buttonClickedValue === 'Sometimes'){
+        nextQuestion = 1
+      } else {
+        nextQuestion = 2
+      }
+      setQuestionShow(nextQuestion)
+    } else if (currentQuestion===2 && buttonClickedValue !== 'No'){
+      nextQuestion = 3
+      setQuestionShow(nextQuestion)
+    } else {
+      navigateToNextScreen()
+    }
+
   }
 
   return (
@@ -31,9 +67,9 @@ const DailyActions = () => {
               {questionOption.question}
             </p>
             <section>
-              <button className='yes-button' onClick={nextQuestion}>Yes</button>
-              {questionOption.answer.sometimes !== 'disabled' && <button className='maybe-button' onClick={nextQuestion}>Sometimes</button>}
-              <button className='no-button' onClick={nextQuestion}>No</button>
+              <button className='yes-button' value='Yes' onClick={nextQuestion}>Yes</button>
+              {questionOption.answer.sometimes !== 'disabled' && <button className='maybe-button' value='Sometimes' onClick={nextQuestion}>Sometimes</button>}
+              <button className='no-button'value='No' onClick={nextQuestion}>No</button>
             </section>
           </div>
         )

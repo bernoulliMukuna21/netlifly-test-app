@@ -9,11 +9,16 @@ import { GlobalStyles } from './style';
 import { createContext, useRef, useState } from 'react';
 import ResearchDesignPlanning from '../components/Pages/Training/Questionnaires/ResearchDesignPlanning';
 import Completed from '../components/Completed';
+import { ThemeProvider } from 'styled-components';
 
 export const AppContext = createContext()
+export var theme = {
+  scoreColor: 'black'
+}
 
 function App() {
   const [training, setTraining] = useState({
+    score: 0,
     dailyAction: 'incomplete',
     researchDesignPlanning: 'incomplete'
   })
@@ -23,6 +28,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
+      <ThemeProvider theme={ theme }>
         <AppContext.Provider value={{training, setTraining}}>
           <Router>
             <Routes>
@@ -40,6 +46,7 @@ function App() {
             </Routes>
           </Router>
         </AppContext.Provider>
+      </ThemeProvider>
     </>
   )
 }

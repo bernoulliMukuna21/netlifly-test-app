@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { StyledCompleted } from "./main.style"
-import React from "react"
+import React, { useContext } from "react"
 import CheckMarkAnimation from '../assets/animations/127266-checkmark.json'
 import Lottie from "react-lottie-player"
 
