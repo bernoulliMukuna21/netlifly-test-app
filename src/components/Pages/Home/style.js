@@ -3,8 +3,14 @@ import { styled } from "styled-components";
 export const StyledHomepage = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  #animation-video{
+    width: 50rem;
+    margin-bottom: 5rem;
+  }
 `
 
 export const StyledAboutPage = styled.div`

@@ -10,6 +10,7 @@ import { createContext, useRef, useState } from 'react';
 import ResearchDesignPlanning from '../components/Pages/Training/Questionnaires/ResearchDesignPlanning';
 import Completed from '../components/Completed';
 import { ThemeProvider } from 'styled-components';
+import Introduction from '../components/Pages/Test/Introduction';
 
 export const AppContext = createContext()
 export var theme = {
@@ -34,6 +35,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Layout pageMinimumHeight={windowHeight}/>}>
                 <Route index element={<Home window/>}/>
+                <Route path='test' element={<Introduction />}/>
                 <Route path='training'>
                   <Route index element={<Training />}/>
                   <Route path='questions/daily_actions' element={<DailyActions />}/>
