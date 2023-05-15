@@ -13,7 +13,7 @@ const DailyActions = () => {
     if(buttonClicked==='Yes'){
       training.score = training.score + 1
     } else if(buttonClicked==='No'){
-      training.score = training.score - 1
+      training.score = training.score - 0.5
       /* if(noCounts === 1){
         training.score = training.score - 1
         noCounts = 0

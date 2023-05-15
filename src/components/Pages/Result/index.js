@@ -11,11 +11,11 @@ const Result = () => {
       theme.scoreColor = '#4CAF50'
       return 'green'
     } else if (score < 0 ) {
-      theme.scoreColor = '#FFBF00'
-      return 'amber'
-    } else {
       theme.scoreColor = '#f44336'
       return 'red'
+    } else {
+      theme.scoreColor = '#FFBF00'
+      return 'amber'
     }
   }
 
